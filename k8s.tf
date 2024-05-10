@@ -1,5 +1,4 @@
 provider "kubernetes" {
-    version = "~> 1.10.0"
     host    = google_container_cluster.default.endpoint
     token   = data.google_client_config.current.access_token
     client_certificate = base64decode(
@@ -75,12 +74,12 @@ resource "kubernetes_replication_controller" "nginx" {
                     name  = "nginx"
 
                     resources {
-                        limits {
+                        limits = {
                             cpu    = "0.5"
                             memory = "512Mi"
                         }
 
-                        requests {
+                        requests = {
                             cpu    = "250m"
                             memory = "50Mi"
                         }
